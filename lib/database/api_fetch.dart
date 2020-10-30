@@ -1,24 +1,19 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/pokemon.dart';
-import '../models/types.dart';
 
 class PokeApi {
   final client = http.Client();
-  static const String url = "https://pokeapi.co/api/v2/";
+  static const String url = "https://gist.githubusercontent.com/mrcsxsiq/b94dbe9ab67147b642baa9109ce16e44/raw/97811a5df2df7304b5bc4fbb9ee018a0339b8a38/";
   PokeApi();
 
-  Future<List<PokemonListView>> getList() async {
-    final response = await client.get(url + "pokemon?limit=100&offset=0");
-    var list = (json.decode(response.body)["results"] as List)
-        .map((data) => PokemonListView.fromJson(data))
+  Future<List<Pokemon>> getList() async {
+    final response = await client.get(url);
+    var list = (json.decode(response.body) as List)
+        .map((data) => Pokemon.fromJson(data))
         .toList();
     return list;
   }
 
-  Future<PokemonData> getPokemon(String url) async {
-    final response = await client.get(url);
-    final pokemon =  PokemonData.fromJson(json.decode(response.body));
-    return pokemon;
-  }
+
 }

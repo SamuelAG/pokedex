@@ -1,349 +1,145 @@
-class PokemonListView {
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+
+class Pokemon {
   String name;
-  String url;
+  String id;
+  String imageurl;
+  String xdescription;
+  String ydescription;
+  String height;
+  String category;
+  String weight;
+  List<String> typeofpokemon;
+  List<String> weaknesses;
+  List<String> evolutions;
+  List<String> abilities;
+  int hp;
+  int attack;
+  int defense;
+  int specialAttack;
+  int specialDefense;
+  int speed;
+  int total;
+  String malePercentage;
+  String femalePercentage;
+  int genderless;
+  String cycles;
+  String eggGroups;
+  String evolvedfrom;
+  String reason;
+  String baseExp;
 
-  PokemonListView({this.name, this.url});
+  static Map<String, Color> type_color = {
+    "normal": HexColor("#A8A878"),
+    "fighting": HexColor("#C03028"),
+    "flying": HexColor("#A890F0"),
+    "poison": HexColor("#A040A0"),
+    "ground": HexColor("#E0C068"),
+    "rock": HexColor("#B8A038"),
+    "bug": HexColor("#A8B820"),
+    "ghost": HexColor("#705898"),
+    "steel": HexColor("#B8B8D0"),
+    "fire": HexColor("#F08030"),
+    "water": HexColor("#6890F0"),
+    "grass": HexColor("#78C850"),
+    "electric": HexColor("#F8D030"),
+    "psychic": HexColor("#F85888"),
+    "dragon": HexColor("#7038F8"),
+    "dark": HexColor("#2C2E2B"),
+    "fairy": HexColor("#E03A83"),
+    "unknown": HexColor("#FFFFFF"),
+    "shadow": HexColor("#705898"),
+  };
 
-  PokemonListView.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
-    return data;
-  }
-}
-
-class PokemonData {
-  List<Abilities> abilities;
-  int height;
-  int id;
-  bool isDefault;
-  List<Moves> moves;
-  String name;
-  int order;
-  Ability species;
-  Sprites sprites;
-  List<Types> types;
-  int weight;
-
-  PokemonData(
-      {this.abilities,
-        this.height,
+  Pokemon(
+      {this.name,
         this.id,
-        this.isDefault,
-        this.moves,
-        this.name,
-        this.order,
-        this.species,
-        this.sprites,
-        this.types,
-        this.weight});
+        this.imageurl,
+        this.xdescription,
+        this.ydescription,
+        this.height,
+        this.category,
+        this.weight,
+        this.typeofpokemon,
+        this.weaknesses,
+        this.evolutions,
+        this.abilities,
+        this.hp,
+        this.attack,
+        this.defense,
+        this.specialAttack,
+        this.specialDefense,
+        this.speed,
+        this.total,
+        this.malePercentage,
+        this.femalePercentage,
+        this.genderless,
+        this.cycles,
+        this.eggGroups,
+        this.evolvedfrom,
+        this.reason,
+        this.baseExp});
 
-  PokemonData.fromJson(Map<String, dynamic> json) {
-    if (json['abilities'] != null) {
-      abilities = new List<Abilities>();
-      json['abilities'].forEach((v) {
-        abilities.add(new Abilities.fromJson(v));
-      });
-    }
-    height = json['height'];
+  Pokemon.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
     id = json['id'];
-    isDefault = json['is_default'];
-    if (json['moves'] != null) {
-      moves = new List<Moves>();
-      json['moves'].forEach((v) {
-        moves.add(new Moves.fromJson(v));
-      });
-    }
-    name = json['name'];
-    order = json['order'];
-    species =
-    json['species'] != null ? new Ability.fromJson(json['species']) : null;
-    sprites =
-    json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
-    if (json['types'] != null) {
-      types = new List<Types>();
-      json['types'].forEach((v) {
-        types.add(new Types.fromJson(v));
-      });
-    }
+    imageurl = json['imageurl'];
+    xdescription = json['xdescription'];
+    ydescription = json['ydescription'];
+    height = json['height'];
+    category = json['category'];
     weight = json['weight'];
+    typeofpokemon = json['typeofpokemon'].cast<String>();
+    weaknesses = json['weaknesses'].cast<String>();
+    evolutions = json['evolutions'].cast<String>();
+    abilities = json['abilities'].cast<String>();
+    hp = json['hp'];
+    attack = json['attack'];
+    defense = json['defense'];
+    specialAttack = json['special_attack'];
+    specialDefense = json['special_defense'];
+    speed = json['speed'];
+    total = json['total'];
+    malePercentage = json['male_percentage'];
+    femalePercentage = json['female_percentage'];
+    genderless = json['genderless'];
+    cycles = json['cycles'];
+    eggGroups = json['egg_groups'];
+    evolvedfrom = json['evolvedfrom'];
+    reason = json['reason'];
+    baseExp = json['base_exp'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.abilities != null) {
-      data['abilities'] = this.abilities.map((v) => v.toJson()).toList();
-    }
-
-    data['height'] = this.height;
-
+    data['name'] = this.name;
     data['id'] = this.id;
-    data['is_default'] = this.isDefault;
-    if (this.moves != null) {
-      data['moves'] = this.moves.map((v) => v.toJson()).toList();
-    }
-    data['name'] = this.name;
-    data['order'] = this.order;
-    if (this.species != null) {
-      data['species'] = this.species.toJson();
-    }
-    if (this.sprites != null) {
-      data['sprites'] = this.sprites.toJson();
-    }
-    if (this.types != null) {
-      data['types'] = this.types.map((v) => v.toJson()).toList();
-    }
+    data['imageurl'] = this.imageurl;
+    data['xdescription'] = this.xdescription;
+    data['ydescription'] = this.ydescription;
+    data['height'] = this.height;
+    data['category'] = this.category;
     data['weight'] = this.weight;
+    data['typeofpokemon'] = this.typeofpokemon;
+    data['weaknesses'] = this.weaknesses;
+    data['evolutions'] = this.evolutions;
+    data['abilities'] = this.abilities;
+    data['hp'] = this.hp;
+    data['attack'] = this.attack;
+    data['defense'] = this.defense;
+    data['special_attack'] = this.specialAttack;
+    data['special_defense'] = this.specialDefense;
+    data['speed'] = this.speed;
+    data['total'] = this.total;
+    data['male_percentage'] = this.malePercentage;
+    data['female_percentage'] = this.femalePercentage;
+    data['genderless'] = this.genderless;
+    data['cycles'] = this.cycles;
+    data['egg_groups'] = this.eggGroups;
+    data['evolvedfrom'] = this.evolvedfrom;
+    data['reason'] = this.reason;
+    data['base_exp'] = this.baseExp;
     return data;
   }
 }
-
-class Types {
-  int slot;
-  Ability type;
-
-  Types({this.slot, this.type});
-
-  Types.fromJson(Map<String, dynamic> json) {
-    slot = json['slot'];
-    type = json['type'] != null ? new Ability.fromJson(json['type']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['slot'] = this.slot;
-    if (this.type != null) {
-      data['type'] = this.type.toJson();
-    }
-    return data;
-  }
-}
-
-class Abilities {
-  Ability ability;
-  bool isHidden;
-  int slot;
-
-  Abilities({this.ability, this.isHidden, this.slot});
-
-  Abilities.fromJson(Map<String, dynamic> json) {
-    ability =
-    json['ability'] != null ? new Ability.fromJson(json['ability']) : null;
-    isHidden = json['is_hidden'];
-    slot = json['slot'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.ability != null) {
-      data['ability'] = this.ability.toJson();
-    }
-    data['is_hidden'] = this.isHidden;
-    data['slot'] = this.slot;
-    return data;
-  }
-}
-
-class Ability {
-  String name;
-  String url;
-
-  Ability({this.name, this.url});
-
-  Ability.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    url = json['url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
-    return data;
-  }
-}
-
-class GameIndices {
-  int gameIndex;
-  Ability version;
-
-  GameIndices({this.gameIndex, this.version});
-
-  GameIndices.fromJson(Map<String, dynamic> json) {
-    gameIndex = json['game_index'];
-    version =
-    json['version'] != null ? new Ability.fromJson(json['version']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['game_index'] = this.gameIndex;
-    if (this.version != null) {
-      data['version'] = this.version.toJson();
-    }
-    return data;
-  }
-}
-
-class HeldItems {
-  Ability item;
-  List<VersionDetails> versionDetails;
-
-  HeldItems({this.item, this.versionDetails});
-
-  HeldItems.fromJson(Map<String, dynamic> json) {
-    item = json['item'] != null ? new Ability.fromJson(json['item']) : null;
-    if (json['version_details'] != null) {
-      versionDetails = new List<VersionDetails>();
-      json['version_details'].forEach((v) {
-        versionDetails.add(new VersionDetails.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.item != null) {
-      data['item'] = this.item.toJson();
-    }
-    if (this.versionDetails != null) {
-      data['version_details'] =
-          this.versionDetails.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class VersionDetails {
-  int rarity;
-  Ability version;
-
-  VersionDetails({this.rarity, this.version});
-
-  VersionDetails.fromJson(Map<String, dynamic> json) {
-    rarity = json['rarity'];
-    version =
-    json['version'] != null ? new Ability.fromJson(json['version']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['rarity'] = this.rarity;
-    if (this.version != null) {
-      data['version'] = this.version.toJson();
-    }
-    return data;
-  }
-}
-
-class Moves {
-  Ability move;
-  List<VersionGroupDetails> versionGroupDetails;
-
-  Moves({this.move, this.versionGroupDetails});
-
-  Moves.fromJson(Map<String, dynamic> json) {
-    move = json['move'] != null ? new Ability.fromJson(json['move']) : null;
-    if (json['version_group_details'] != null) {
-      versionGroupDetails = new List<VersionGroupDetails>();
-      json['version_group_details'].forEach((v) {
-        versionGroupDetails.add(new VersionGroupDetails.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.move != null) {
-      data['move'] = this.move.toJson();
-    }
-    if (this.versionGroupDetails != null) {
-      data['version_group_details'] =
-          this.versionGroupDetails.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class VersionGroupDetails {
-  int levelLearnedAt;
-  Ability moveLearnMethod;
-  Ability versionGroup;
-
-  VersionGroupDetails(
-      {this.levelLearnedAt, this.moveLearnMethod, this.versionGroup});
-
-  VersionGroupDetails.fromJson(Map<String, dynamic> json) {
-    levelLearnedAt = json['level_learned_at'];
-    moveLearnMethod = json['move_learn_method'] != null
-        ? new Ability.fromJson(json['move_learn_method'])
-        : null;
-    versionGroup = json['version_group'] != null
-        ? new Ability.fromJson(json['version_group'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['level_learned_at'] = this.levelLearnedAt;
-    if (this.moveLearnMethod != null) {
-      data['move_learn_method'] = this.moveLearnMethod.toJson();
-    }
-    if (this.versionGroup != null) {
-      data['version_group'] = this.versionGroup.toJson();
-    }
-    return data;
-  }
-}
-
-class Sprites {
-  String backDefault;
-  String backFemale;
-  String backShiny;
-  String backShinyFemale;
-  String frontDefault;
-  String frontFemale;
-  String frontShiny;
-  String frontShinyFemale;
-
-  Sprites(
-      {this.backDefault,
-        this.backFemale,
-        this.backShiny,
-        this.backShinyFemale,
-        this.frontDefault,
-        this.frontFemale,
-        this.frontShiny,
-        this.frontShinyFemale,});
-
-  Sprites.fromJson(Map<String, dynamic> json) {
-    backDefault = json['back_default'];
-    backFemale = json['back_female'];
-    backShiny = json['back_shiny'];
-    backShinyFemale = json['back_shiny_female'];
-    frontDefault = json['front_default'];
-    frontFemale = json['front_female'];
-    frontShiny = json['front_shiny'];
-    frontShinyFemale = json['front_shiny_female'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['back_default'] = this.backDefault;
-    data['back_female'] = this.backFemale;
-    data['back_shiny'] = this.backShiny;
-    data['back_shiny_female'] = this.backShinyFemale;
-    data['front_default'] = this.frontDefault;
-    data['front_female'] = this.frontFemale;
-    data['front_shiny'] = this.frontShiny;
-    data['front_shiny_female'] = this.frontShinyFemale;
-    return data;
-  }
-}
-
-
