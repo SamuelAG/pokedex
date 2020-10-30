@@ -1,4 +1,4 @@
-#Thu Oct 29 16:57:58 BRT 2020
+#Thu Oct 29 21:03:42 BRT 2020
 base.0=C\:\\Users\\samue\\AndroidStudioProjects\\pokedex\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
